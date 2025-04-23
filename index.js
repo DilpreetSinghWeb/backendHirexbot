@@ -3,12 +3,15 @@
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 
 const app = express();
+
 
 app.use(cors());
 app.use(express.json());
 require("dotenv").config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 app.post("/careers", async (req, res) => {
   try {
@@ -31,8 +34,8 @@ app.post("/careers", async (req, res) => {
 
     // Mail to Admin
     const mailToAdmin = {
-      from: email,
       to: process.env.EMAIL_USER,
+      from: email,
       subject: "New Career Application - HirexBot",
       html: `
         <html>
@@ -107,6 +110,7 @@ app.post("/careers", async (req, res) => {
         </html>
       `,
     };
+    console.log(process.env.EMAIL_USER)
 
     // Mail to Applicant
     const mailToClient = {
@@ -183,13 +187,13 @@ app.post("/careers", async (req, res) => {
     };
 
     try {
-      await transporter.sendMail(mailToAdmin);
+      await sgMail.send(mailToAdmin);
     } catch (error) {
       console.error("Failed to send career email to admin:", error);
     }
 
     try {
-      await transporter.sendMail(mailToClient);
+      await sgMail.send(mailToClient);
       
     } catch (error) {
       console.error("Failed to send confirmation to applicant:", error);
@@ -385,13 +389,13 @@ app.post("/contact", async (req, res) => {
     };
 
     try {
-      await transporter.sendMail(mailToAdmin);
+      await sgMail.send(mailToAdmin);
     } catch (error) {
       console.error("Failed to send email to admin:", error);
     }
 
     try {
-      await transporter.sendMail(mailToClient);
+      await sgMail.send(mailToClient);
     } catch (error) {
       console.error("Failed to send email to client:", error);
     }

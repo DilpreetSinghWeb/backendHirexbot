@@ -5,8 +5,8 @@ export default function generateContactAdminEmail(data) {
   const { fullName, email, phone, message } = data;
 
   return {
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
+    from: process.env.HOSTINGER_EMAIL_CONTACT,
+    to: process.env.HOSTINGER_EMAIL_CONTACT,
     subject: "New Inquiry from HirexBot Contact Form",
     html: `
       <html>

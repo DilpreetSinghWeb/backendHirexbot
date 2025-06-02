@@ -4,7 +4,7 @@ export default function generateCareerClientEmail(data) {
     const { firstName, lastName, email, phone, position, experience, message } = data;
     return {
       to: email,
-      from: process.env.EMAIL_USER,
+      from: process.env.HOSTINGER_EMAIL_CAREER,
       subject: `Application Received - ${position} at HirexBot`,
       html: `
       <html>

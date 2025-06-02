@@ -7,11 +7,10 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.HOSTINGER_EMAIL,
-    pass: process.env.HOSTINGER_PASSWORD,
+    user: process.env.HOSTINGER_EMAIL_CAREER,
+    pass: process.env.HOSTINGER_PASSWORD_CAREER,
   },
 });
-console.log(process.env.HOSTINGER_PASSWORD)
 
 export default async function sendCareerEmails(data) {
   const adminMail = generateCareerAdminEmail(data);
@@ -19,14 +18,12 @@ export default async function sendCareerEmails(data) {
 
   try {
     await transporter.sendMail(adminMail);
-    console.log("Mail sent to admin");
   } catch (err) {
     console.error("Error sending mail to admin:", err);
   }
 
   try {
     await transporter.sendMail(clientMail);
-    console.log("Mail sent to client");
   } catch (err) {
     console.error("Error sending mail to client:", err);
   }

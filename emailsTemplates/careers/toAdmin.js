@@ -5,8 +5,8 @@ export default function generateCareerAdminEmail(data) {
   const { firstName, lastName, email, phone, position, experience, message } = data;
   
   return {
-    to: process.env.EMAIL_USER,
-    from: process.env.EMAIL_USER,
+    to: process.env.HOSTINGER_EMAIL_CAREER,
+    from: process.env.HOSTINGER_EMAIL_CAREER,
     replyTo: email, 
     subject: "New Career Application - HirexBot",
     html: `

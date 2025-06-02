@@ -6,7 +6,7 @@ export default function generateContactClientEmail(data) {
 
   return {
     to: email,
-    from: process.env.EMAIL_USER,
+    from: process.env.HOSTINGER_EMAIL_CONTACT,
     subject: "We Received Your Message at HirexBot!",
     html: `
       <html>
